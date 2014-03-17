@@ -8,8 +8,7 @@ namespace LinkarServer.Models
 {
     public class User
     {
-        public int UserId { get; set; }
-        [Required]
+        [Key]
         public string username { get; set; }
         [Required]
         public String email { get; set; }

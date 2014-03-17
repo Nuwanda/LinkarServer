@@ -24,7 +24,7 @@ namespace LinkarServer.Controllers
 
         // GET api/User/5
         [ResponseType(typeof(User))]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetUser(string id)
         {
             User user = db.Users.Find(id);
             if (user == null)
@@ -36,14 +36,14 @@ namespace LinkarServer.Controllers
         }
 
         // PUT api/User/5
-        public IHttpActionResult PutUser(int id, User user)
+        public IHttpActionResult PutUser(string id, User user)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.UserId)
+            if (id != user.username)
             {
                 return BadRequest();
             }
@@ -79,14 +79,29 @@ namespace LinkarServer.Controllers
             }
 
             db.Users.Add(user);
-            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.UserId }, user);
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                if (UserExists(user.username))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = user.username }, user);
         }
 
         // DELETE api/User/5
         [ResponseType(typeof(User))]
-        public IHttpActionResult DeleteUser(int id)
+        public IHttpActionResult DeleteUser(string id)
         {
             User user = db.Users.Find(id);
             if (user == null)
@@ -109,9 +124,9 @@ namespace LinkarServer.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
-            return db.Users.Count(e => e.UserId == id) > 0;
+            return db.Users.Count(e => e.username == id) > 0;
         }
     }
 }

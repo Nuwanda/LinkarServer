@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201403121454573_fields now required.Designer.cs">
       <DependentUpon>201403121454573_fields now required.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403171128316_changed user key to  username.cs" />
+    <Compile Include="Migrations\201403171128316_changed user key to  username.Designer.cs">
+      <DependentUpon>201403171128316_changed user key to  username.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Link.cs" />
     <Compile Include="Models\LinkarServerContext.cs" />
@@ -221,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403121454573_fields now required.resx">
       <DependentUpon>201403121454573_fields now required.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403171128316_changed user key to  username.resx">
+      <DependentUpon>201403171128316_changed user key to  username.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
