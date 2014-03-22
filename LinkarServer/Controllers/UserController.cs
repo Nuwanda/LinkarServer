@@ -23,7 +23,6 @@ namespace LinkarServer.Controllers
         }
 
         // GET api/User/5
-        [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(string id)
         {
             User user = db.Users.Find(id);
@@ -32,6 +31,30 @@ namespace LinkarServer.Controllers
                 return NotFound();
             }
 
+            return Ok(user);
+        }
+
+        // GET api/User(5)/Friends
+        [Route("user/{id}/friends")]
+        public IQueryable<User> GetFriends(string id)
+        {
+            User user = db.Users.FirstOrDefault(u => u.username == id);
+            if (user == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return user.friends.AsQueryable<User>();
+        }
+
+        // GET api/User/byChannelId/5
+        [Route("user/byChannelId/{channelId}")]
+        public IHttpActionResult GetByChannelId(string channelId)
+        {
+            User user = db.Users.FirstOrDefault(u => u.channelId == channelId);
+            if (user == null)
+            {
+                return NotFound();
+            }
             return Ok(user);
         }
 
