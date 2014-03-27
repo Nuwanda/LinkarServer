@@ -48,7 +48,7 @@ namespace LinkarServer.Controllers
         }
 
         // GET api/User/byChannelId/5
-        [Route("user/byChannelId/{channelId}")]
+        [Route("user/byChannelId/{*channelId}")]
         public IHttpActionResult GetByChannelId(string channelId)
         {
             User user = db.Users.FirstOrDefault(u => u.channelId == channelId);

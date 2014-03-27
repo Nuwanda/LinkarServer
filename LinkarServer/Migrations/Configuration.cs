@@ -17,9 +17,9 @@ namespace LinkarServer.Migrations
         {
             context.Users.AddOrUpdate(
                 u => u.username,
-                new User { username = "teste1", email = "teste1@gmail.com", channelId="asdasdasd1313132"},
-                new User { username = "teste2", email = "teste2@gmail.com", channelId="asdaqweqwesd1313132" },
-                new User { username = "teste3", email = "teste3@gmail.com", channelId="asdqweqeqwewqeqw131232" }
+                new User { username = "teste1", email = "teste1@gmail.com", channelId="asdasda/sd1313132"},
+                new User { username = "teste2", email = "teste2@gmail.com", channelId="asdaqweqwesd13/13132" },
+                new User { username = "teste3", email = "teste3@gmail.com", channelId="asdqweq/eqwewqeqw131232" }
             );
         }
     }
