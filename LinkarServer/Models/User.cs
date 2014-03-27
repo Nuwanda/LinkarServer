@@ -14,7 +14,6 @@ namespace LinkarServer.Models
         public String email { get; set; }
         [Required]
         public String channelId { get; set; }
-        public String friendshipId { get; set; }
-        public virtual List<User> friends { get; set; }
+        public virtual ICollection<User> friends { get; set; }
     }
 }

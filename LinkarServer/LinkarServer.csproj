@@ -172,6 +172,10 @@
     <Compile Include="Migrations\201403271908034_proper friendship mapping.Designer.cs">
       <DependentUpon>201403271908034_proper friendship mapping.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403271926192_another friendship mapping.cs" />
+    <Compile Include="Migrations\201403271926192_another friendship mapping.Designer.cs">
+      <DependentUpon>201403271926192_another friendship mapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Link.cs" />
     <Compile Include="Models\LinkarServerContext.cs" />
@@ -235,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403271908034_proper friendship mapping.resx">
       <DependentUpon>201403271908034_proper friendship mapping.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403271926192_another friendship mapping.resx">
+      <DependentUpon>201403271926192_another friendship mapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
