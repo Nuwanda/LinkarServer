@@ -10,6 +10,7 @@ namespace LinkarServer.Models
     {    
         public LinkarServerContext() : base("name=LinkarServerContext")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

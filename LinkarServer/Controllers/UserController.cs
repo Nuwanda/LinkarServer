@@ -43,6 +43,7 @@ namespace LinkarServer.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
+            db.Entry(user).Collection(u => u.friends).Load(); 
             return user.friends.AsQueryable<User>();
         }
 
@@ -56,6 +57,35 @@ namespace LinkarServer.Controllers
                 return NotFound();
             }
             return Ok(user);
+        }
+
+        // POST api/User/5/addFriend/3
+        [Route("user/{username}/addFriend/{friendId}")]
+        public IHttpActionResult PostFriend(string username, string friendId)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            if (username == friendId)
+                return BadRequest();
+
+            User user = db.Users.FirstOrDefault(u => u.username == username);
+            if (user == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            User friend = db.Users.FirstOrDefault(u => u.username == friendId);
+            if (friend == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            db.Entry(user).Collection(u => u.friends).Load();  
+            if (!user.friends.Contains(friend))
+                user.friends.Add(friend);
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // PUT api/User/5
