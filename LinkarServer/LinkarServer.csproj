@@ -168,6 +168,10 @@
     <Compile Include="Migrations\201403171128316_changed user key to  username.Designer.cs">
       <DependentUpon>201403171128316_changed user key to  username.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201403271908034_proper friendship mapping.cs" />
+    <Compile Include="Migrations\201403271908034_proper friendship mapping.Designer.cs">
+      <DependentUpon>201403271908034_proper friendship mapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Link.cs" />
     <Compile Include="Models\LinkarServerContext.cs" />
@@ -228,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201403171128316_changed user key to  username.resx">
       <DependentUpon>201403171128316_changed user key to  username.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403271908034_proper friendship mapping.resx">
+      <DependentUpon>201403271908034_proper friendship mapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

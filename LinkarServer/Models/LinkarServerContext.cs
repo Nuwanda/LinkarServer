@@ -16,6 +16,10 @@ namespace LinkarServer.Models
         {
             Database.SetInitializer(
                 new MigrateDatabaseToLatestVersion<LinkarServerContext, Migrations.Configuration>());
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.friends)
+                .WithOptional()
+                .HasForeignKey(u => u.friendshipId);
         }
 
         public System.Data.Entity.DbSet<LinkarServer.Models.User> Users { get; set; }
