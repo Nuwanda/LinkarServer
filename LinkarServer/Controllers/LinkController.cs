@@ -16,102 +16,22 @@ namespace LinkarServer.Controllers
     {
         private LinkarServerContext db = new LinkarServerContext();
 
-        // GET /Link
-        public IQueryable<Link> GetLinks()
+        // POST /Link/from/:from/to/:to
+        [Route("link/from/{from}/to/{to}")]
+        public IHttpActionResult PostLinkFromTo([FromBody]dynamic link, string from, string to)
         {
-            return db.Links;
-        }
+            User fromUser = db.Users.Find(from);
+            User toUser = db.Users.Find(to);
 
-        // GET /Link/5
-        [ResponseType(typeof(Link))]
-        public IHttpActionResult GetLink(int id)
-        {
-            Link link = db.Links.Find(id);
-            if (link == null)
+            if (fromUser == null || toUser == null)
             {
                 return NotFound();
             }
-
-            return Ok(link);
-        }
-
-        // PUT /Link/5
-        public IHttpActionResult PutLink(int id, Link link)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != link.LinkId)
-            {
+            if (link == null || link.url == null)
                 return BadRequest();
-            }
+            String url = link.url.Value;
 
-            db.Entry(link).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!LinkExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST /Link
-        [ResponseType(typeof(Link))]
-        public IHttpActionResult PostLink(Link link)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Links.Add(link);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = link.LinkId }, link);
-        }
-
-        // DELETE /Link/5
-        [ResponseType(typeof(Link))]
-        public IHttpActionResult DeleteLink(int id)
-        {
-            Link link = db.Links.Find(id);
-            if (link == null)
-            {
-                return NotFound();
-            }
-
-            db.Links.Remove(link);
-            db.SaveChanges();
-
-            return Ok(link);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool LinkExists(int id)
-        {
-            return db.Links.Count(e => e.LinkId == id) > 0;
+            return Ok();
         }
     }
 }

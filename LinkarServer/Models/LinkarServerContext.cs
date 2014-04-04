@@ -29,8 +29,6 @@ namespace LinkarServer.Models
         }
 
         public System.Data.Entity.DbSet<LinkarServer.Models.User> Users { get; set; }
-
-        public System.Data.Entity.DbSet<LinkarServer.Models.Link> Links { get; set; }
     
     }
 }
