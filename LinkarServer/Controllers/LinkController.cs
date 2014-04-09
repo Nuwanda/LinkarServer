@@ -17,19 +17,22 @@ namespace LinkarServer.Controllers
         private LinkarServerContext db = new LinkarServerContext();
 
         // POST /Link/from/:from/to/:to
-        [Route("link/from/{from}/to/{to}")]
-        public IHttpActionResult PostLinkFromTo([FromBody]dynamic link, string from, string to)
+        [Route("link/")]
+        public IHttpActionResult PostLinkFromTo(Link link)
         {
-            User fromUser = db.Users.Find(from);
-            User toUser = db.Users.Find(to);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            User fromUser = db.Users.Find(link.from);
+            User toUser = db.Users.Find(link.to);
 
             if (fromUser == null || toUser == null)
             {
                 return NotFound();
             }
-            if (link == null || link.url == null)
-                return BadRequest();
-            String url = link.url.Value;
+            String url = link.url;
 
             return Ok();
         }
